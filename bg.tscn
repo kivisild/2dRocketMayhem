@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://byt1l02tp57ti"]
 
-[ext_resource type="Texture2D" uid="uid://b6uiij6o5csvm" path="res://Assets/Environments/Mountain/Environment/back.png" id="1_tuaf8"]
-[ext_resource type="Texture2D" uid="uid://bp6cn3mg8cjcf" path="res://Assets/Environments/Mountain/Environment/middle.png" id="2_e8j8q"]
-[ext_resource type="Texture2D" uid="uid://dtwxhihjk3wdy" path="res://Assets/Environments/Colorful Environment/PNG/layers/cloud.png" id="3_e8j8q"]
+[ext_resource type="Texture2D" uid="uid://b6uiij6o5csvm" path="res://Assets/Sunnyland/Environments/Mountain/Environment/back.png" id="1_tuaf8"]
+[ext_resource type="Texture2D" uid="uid://bp6cn3mg8cjcf" path="res://Assets/Sunnyland/Environments/Mountain/Environment/middle.png" id="2_e8j8q"]
+[ext_resource type="Texture2D" uid="uid://dtwxhihjk3wdy" path="res://Assets/Sunnyland/Environments/Colorful Environment/PNG/layers/cloud.png" id="3_e8j8q"]
 
 [sub_resource type="GDScript" id="GDScript_e8j8q"]
 script/source = "extends ParallaxLayer

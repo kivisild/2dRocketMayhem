@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=4 uid="uid://26vo2gno5chy"]
 
 [ext_resource type="PackedScene" uid="uid://byt1l02tp57ti" path="res://bg.tscn" id="1_hbghi"]
-[ext_resource type="Texture2D" uid="uid://b6iosbt5mocak" path="res://Assets/Environments/Mountain/Environment/tileset.png" id="1_hn12h"]
+[ext_resource type="Texture2D" uid="uid://b6iosbt5mocak" path="res://Assets/Sunnyland/Environments/Mountain/Environment/tileset.png" id="1_hn12h"]
 [ext_resource type="PackedScene" uid="uid://hfwwplmixeh7" path="res://player.tscn" id="2_hn12h"]
-[ext_resource type="Texture2D" uid="uid://blvh24u4w7f2u" path="res://Assets/Environments/Mountain/Environment/props.png" id="2_ihfcg"]
+[ext_resource type="Texture2D" uid="uid://blvh24u4w7f2u" path="res://Assets/Sunnyland/Environments/Mountain/Environment/props.png" id="2_ihfcg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ihfcg"]
 texture = ExtResource("1_hn12h")

@@ -1,23 +1,23 @@
 [gd_scene load_steps=26 format=3 uid="uid://hfwwplmixeh7"]
 
-[ext_resource type="Texture2D" uid="uid://dtr68hmcb40j8" path="res://Assets/Characters/Players/Fiery Imp/idle/Sprites/idle-1.png" id="1_op7ga"]
+[ext_resource type="Texture2D" uid="uid://dtr68hmcb40j8" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/idle/Sprites/idle-1.png" id="1_op7ga"]
 [ext_resource type="Script" uid="uid://disq2uoe710xc" path="res://player.gd" id="1_q13i1"]
-[ext_resource type="Texture2D" uid="uid://bh424bdad5qab" path="res://Assets/Characters/Players/Fiery Imp/idle/Sprites/idle-2.png" id="2_q13i1"]
-[ext_resource type="Texture2D" uid="uid://c0i8klrvkct4r" path="res://Assets/Characters/Players/Fiery Imp/idle/Sprites/idle-3.png" id="3_pylmc"]
-[ext_resource type="Texture2D" uid="uid://dijkpy358vfqj" path="res://Assets/Characters/Players/Fiery Imp/idle/Sprites/idle-4.png" id="4_pbfsw"]
-[ext_resource type="Texture2D" uid="uid://dxua71v2snmcu" path="res://Assets/Characters/Players/Fiery Imp/jump/Sprites/jump-1.png" id="5_5tmop"]
-[ext_resource type="Texture2D" uid="uid://diyax23xbyvv5" path="res://Assets/Characters/Players/Fiery Imp/jump/Sprites/jump-2.png" id="6_7ahtn"]
-[ext_resource type="Texture2D" uid="uid://bwreedw6vta1u" path="res://Assets/Characters/Players/Fiery Imp/jump/Sprites/jump-3.png" id="7_7lmhl"]
-[ext_resource type="Texture2D" uid="uid://dibqq3on0kovd" path="res://Assets/Characters/Players/Fiery Imp/jump/Sprites/jump-4.png" id="8_dx0e4"]
-[ext_resource type="Texture2D" uid="uid://byla5h062bfha" path="res://Assets/Characters/Players/Fiery Imp/jump/Sprites/jump-5.png" id="9_jm5j8"]
-[ext_resource type="Texture2D" uid="uid://djptnelxa4eql" path="res://Assets/Characters/Players/Fiery Imp/run/Sprites/run-1.png" id="10_7hik5"]
-[ext_resource type="Texture2D" uid="uid://bbaiwhdii8vgt" path="res://Assets/Characters/Players/Fiery Imp/run/Sprites/run-2.png" id="11_qtqh7"]
-[ext_resource type="Texture2D" uid="uid://bdfrxfk6q7u3p" path="res://Assets/Characters/Players/Fiery Imp/run/Sprites/run-3.png" id="12_2wuci"]
-[ext_resource type="Texture2D" uid="uid://r0yx26q627hm" path="res://Assets/Characters/Players/Fiery Imp/run/Sprites/run-4.png" id="13_iruf7"]
-[ext_resource type="Texture2D" uid="uid://dg83e38t0kq13" path="res://Assets/Characters/Players/Fiery Imp/run/Sprites/run-5.png" id="14_j5n4i"]
-[ext_resource type="Texture2D" uid="uid://b3jxu0qqi6wph" path="res://Assets/Characters/Players/Fiery Imp/run/Sprites/run-6.png" id="15_634y6"]
-[ext_resource type="Texture2D" uid="uid://cav1wrtv8v4c2" path="res://Assets/Characters/Players/Fiery Imp/run/Sprites/run-7.png" id="16_efrwb"]
-[ext_resource type="Texture2D" uid="uid://tdq0nan1alo4" path="res://Assets/Characters/Players/Fiery Imp/run/Sprites/run-8.png" id="17_hiqhm"]
+[ext_resource type="Texture2D" uid="uid://bh424bdad5qab" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/idle/Sprites/idle-2.png" id="2_q13i1"]
+[ext_resource type="Texture2D" uid="uid://c0i8klrvkct4r" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/idle/Sprites/idle-3.png" id="3_pylmc"]
+[ext_resource type="Texture2D" uid="uid://dijkpy358vfqj" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/idle/Sprites/idle-4.png" id="4_pbfsw"]
+[ext_resource type="Texture2D" uid="uid://dxua71v2snmcu" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/jump/Sprites/jump-1.png" id="5_5tmop"]
+[ext_resource type="Texture2D" uid="uid://diyax23xbyvv5" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/jump/Sprites/jump-2.png" id="6_7ahtn"]
+[ext_resource type="Texture2D" uid="uid://bwreedw6vta1u" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/jump/Sprites/jump-3.png" id="7_7lmhl"]
+[ext_resource type="Texture2D" uid="uid://dibqq3on0kovd" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/jump/Sprites/jump-4.png" id="8_dx0e4"]
+[ext_resource type="Texture2D" uid="uid://byla5h062bfha" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/jump/Sprites/jump-5.png" id="9_jm5j8"]
+[ext_resource type="Texture2D" uid="uid://djptnelxa4eql" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/run/Sprites/run-1.png" id="10_7hik5"]
+[ext_resource type="Texture2D" uid="uid://bbaiwhdii8vgt" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/run/Sprites/run-2.png" id="11_qtqh7"]
+[ext_resource type="Texture2D" uid="uid://bdfrxfk6q7u3p" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/run/Sprites/run-3.png" id="12_2wuci"]
+[ext_resource type="Texture2D" uid="uid://r0yx26q627hm" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/run/Sprites/run-4.png" id="13_iruf7"]
+[ext_resource type="Texture2D" uid="uid://dg83e38t0kq13" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/run/Sprites/run-5.png" id="14_j5n4i"]
+[ext_resource type="Texture2D" uid="uid://b3jxu0qqi6wph" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/run/Sprites/run-6.png" id="15_634y6"]
+[ext_resource type="Texture2D" uid="uid://cav1wrtv8v4c2" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/run/Sprites/run-7.png" id="16_efrwb"]
+[ext_resource type="Texture2D" uid="uid://tdq0nan1alo4" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/run/Sprites/run-8.png" id="17_hiqhm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sh265"]
 
@@ -224,5 +224,7 @@ autoplay = "Idle"
 [node name="JumpLeewayTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
 
 [connection signal="timeout" from="JumpLeewayTimer" to="." method="_on_jump_leeway_timer_timeout"]

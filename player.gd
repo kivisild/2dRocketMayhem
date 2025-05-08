@@ -11,6 +11,9 @@ var was_on_floor = false;
 
 @onready var jump_leeway_timer = $JumpLeewayTimer
 @onready var anim = get_node("AnimationPlayer")
+@onready var rocket = preload("res://rocket.tscn")
+
+
 
 
 
@@ -57,6 +60,16 @@ func _physics_process(delta: float) -> void:
 			
 	#if velocity.y > 0:
 		#anim.play("Fall")
+	if Input.is_action_just_pressed("click"):
+		print("shoot rocket")
+		var r = rocket.instantiate()
+		r.global_position = global_position 
+		var dir = (get_global_mouse_position() - r.global_position).normalized()
+		r.rotation = dir.angle() + PI/2
+		r.velocity = dir * r.speed
+		get_tree().current_scene.add_child(r)
+			
+
 
 	move_and_slide()
 	if (is_on_floor() and !was_on_floor):
@@ -65,6 +78,7 @@ func _physics_process(delta: float) -> void:
 			jumping = false
 			print("Landed - Is on floor and was not on floor")
 			
+	
 		
 
 

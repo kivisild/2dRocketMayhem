@@ -13,11 +13,13 @@ var was_on_floor = false;
 @onready var anim = get_node("AnimationPlayer")
 @onready var rocket = preload("res://rocket.tscn")
 
-
-
+var blast_impulse = Vector2.ZERO
 
 
 func _physics_process(delta: float) -> void:
+	velocity += blast_impulse
+	blast_impulse = Vector2.ZERO
+	
 	was_on_floor = is_on_floor()
 	
 		
@@ -51,6 +53,7 @@ func _physics_process(delta: float) -> void:
 		get_node("AnimatedSprite2D").flip_h = false
 	if direction:
 		velocity.x = direction * SPEED
+		
 		if velocity.y == 0:
 			anim.play("Run")
 	else:
@@ -61,8 +64,8 @@ func _physics_process(delta: float) -> void:
 	#if velocity.y > 0:
 		#anim.play("Fall")
 	if Input.is_action_just_pressed("click"):
-		print("shoot rocket")
 		var r = rocket.instantiate()
+		r.connect("exploded", Callable(self, "_on_rocket_exploded"))
 		r.global_position = global_position 
 		var dir = (get_global_mouse_position() - r.global_position).normalized()
 		r.rotation = dir.angle() + PI/2
@@ -72,15 +75,24 @@ func _physics_process(delta: float) -> void:
 
 
 	move_and_slide()
+	   
 	if (is_on_floor() and !was_on_floor):
 			# Landed
 			currentJumps = 0
 			jumping = false
 			print("Landed - Is on floor and was not on floor")
-			
-	
-		
-
 
 func _on_jump_leeway_timer_timeout() -> void:
 	pass
+	
+func _on_rocket_exploded(explosion_pos: Vector2) -> void:
+	var dir_from_blast = (global_position - explosion_pos).normalized()
+	var distance = global_position.distance_to(explosion_pos)
+	
+	var max_radius = 100.0
+	if distance > max_radius:
+		return
+		
+	var strength = 800.0
+	
+	blast_impulse = (global_position - explosion_pos).normalized() * strength

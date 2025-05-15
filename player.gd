@@ -1,98 +1,86 @@
 extends CharacterBody2D
 
+const SPEED           = 200.0
+const JUMP_VELOCITY   = -400.0
+const MAX_JUMPS       = 2
+const BLAST_DECAY     = 2000.0       # pixels / s² of “air-friction” on the knock-back
+const GROUND_FRICTION = 1_200.0       # pixels / s² when no input   (tweak to taste)
 
-const SPEED = 200.0
-const JUMP_VELOCITY = -400.0
-const max_jumps = 2
+var current_jumps  : int       = 0
+var jumping        : bool      = false
+var was_on_floor   : bool      = false
+var blast_impulse  : Vector2   = Vector2.ZERO   # one-off knock-back that fades out
 
-var currentJumps = 0
-var jumping = false
-var was_on_floor = false;
-
-@onready var jump_leeway_timer = $JumpLeewayTimer
-@onready var anim = get_node("AnimationPlayer")
-@onready var rocket = preload("res://rocket.tscn")
-
-var blast_impulse = Vector2.ZERO
-
+@onready var jump_leeway_timer : Timer           = $JumpLeewayTimer
+@onready var anim               : AnimationPlayer = $AnimationPlayer
+@onready var rocket_scene       : PackedScene     = preload("res://rocket.tscn")
 
 func _physics_process(delta: float) -> void:
-	velocity += blast_impulse
-	blast_impulse = Vector2.ZERO
-	
-	was_on_floor = is_on_floor()
-	
-		
-	if (was_on_floor and !is_on_floor()):
-		jump_leeway_timer.start()
-		
-	# Add the gravity.
-	if not is_on_floor():
+	# 1. ─── START WITH GRAVITY ───────────────────────────────
+	if !is_on_floor():
 		velocity += get_gravity() * delta
-		
-	
-	
 
-	# Handle jump.
-	# Coyote time
-	if ((Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_up")) and currentJumps < max_jumps) or ((Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_up")) and !jump_leeway_timer.is_stopped() and !jumping):
-		velocity.y = JUMP_VELOCITY
-		jumping = true
-		currentJumps += 1
-		anim.play("Jump")
-		print("Jumping")
-		
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction == -1:
-		get_node("AnimatedSprite2D").flip_h = true
-	
-	elif direction == 1:
-		get_node("AnimatedSprite2D").flip_h = false
-	if direction:
-		velocity.x = direction * SPEED
-		
+	# 2. ─── READ HORIZONTAL INPUT INTO local var `input_vx` ─
+	var input_vx := 0.0
+	var dir := Input.get_axis("ui_left", "ui_right")
+	if dir != 0:
+		input_vx = dir * SPEED
+		$AnimatedSprite2D.flip_h = dir < 0
 		if velocity.y == 0:
 			anim.play("Run")
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		# natural ground friction when no keys are pressed
+		input_vx = move_toward(velocity.x, 0, GROUND_FRICTION * delta)
 		if velocity.y == 0:
 			anim.play("Idle")
-			
-	#if velocity.y > 0:
-		#anim.play("Fall")
-	if Input.is_action_just_pressed("click"):
-		var r = rocket.instantiate()
-		r.connect("exploded", Callable(self, "_on_rocket_exploded"))
-		r.global_position = global_position 
-		var dir = (get_global_mouse_position() - r.global_position).normalized()
-		r.rotation = dir.angle() + PI/2
-		r.velocity = dir * r.speed
-		get_tree().current_scene.add_child(r)
-			
 
+	# 3. ─── JUMP ─────────────────────────────────────────────
+	if (Input.is_action_just_pressed("ui_accept") \
+		or Input.is_action_just_pressed("ui_up")) \
+		and (current_jumps < MAX_JUMPS \
+			 or (!jump_leeway_timer.is_stopped() and !jumping)):
+		velocity.y = JUMP_VELOCITY
+		jumping = true
+		current_jumps += 1
+		anim.play("Jump")
+
+	# 4. ─── COMBINE INPUT + BLAST, THEN MOVE ────────────────
+	velocity.x = input_vx + blast_impulse.x
+	velocity.y += blast_impulse.y * 0.9                    # vertical kick too (optional)
 
 	move_and_slide()
-	   
-	if (is_on_floor() and !was_on_floor):
-			# Landed
-			currentJumps = 0
-			jumping = false
-			print("Landed - Is on floor and was not on floor")
 
-func _on_jump_leeway_timer_timeout() -> void:
-	pass
-	
+	# 5. ─── FADE OUT THE IMPULSE AFTER WE MOVE ─────────────
+	blast_impulse = blast_impulse.move_toward(
+		Vector2.ZERO, BLAST_DECAY * delta)
+
+	# 6. ─── LANDING RESET ──────────────────────────────────
+	if is_on_floor() and !was_on_floor:
+		current_jumps = 0
+		jumping = false
+	was_on_floor = is_on_floor()
+
+	# 7. ─── SPAWN ROCKET ───────────────────────────────────
+	if Input.is_action_just_pressed("click"):
+		var r := rocket_scene.instantiate()
+		r.global_position = global_position
+		var aim_dir : Vector2= (get_global_mouse_position() - r.global_position).normalized()
+		r.rotation  = aim_dir.angle() + PI / 2
+		r.velocity  = aim_dir * r.speed
+		r.connect("exploded", Callable(self, "_on_rocket_exploded"))
+		get_tree().current_scene.add_child(r)
+
+
+# ───────────────────────────
+#  ROCKET BLAST CALLBACK
 func _on_rocket_exploded(explosion_pos: Vector2) -> void:
-	var dir_from_blast = (global_position - explosion_pos).normalized()
-	var distance = global_position.distance_to(explosion_pos)
-	
-	var max_radius = 100.0
-	if distance > max_radius:
-		return
-		
-	var strength = 800.0
-	
-	blast_impulse = (global_position - explosion_pos).normalized() * strength
+	const MAX_RADIUS := 100.0
+	const STRENGTH   := 300.0
+
+	var to_player := global_position - explosion_pos
+	var distance  := to_player.length()
+	if distance > MAX_RADIUS:
+		return                                    # out of range
+
+	var falloff := 1.0 - (distance / MAX_RADIUS) # 1 at center, 0 at edge
+	blast_impulse = to_player.normalized() * STRENGTH * falloff

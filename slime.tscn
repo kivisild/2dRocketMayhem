@@ -1,0 +1,129 @@
+[gd_scene load_steps=24 format=3 uid="uid://md6kax0htvu0"]
+
+[ext_resource type="Script" uid="uid://dgbscpbrb2cww" path="res://slime.gd" id="1_hagqt"]
+[ext_resource type="Texture2D" uid="uid://dktcbx5bl1710" path="res://Assets/Sunnyland/Props Items and VFX/enemy-death 2/Sprites/enemy-death-1.png" id="1_yfmhs"]
+[ext_resource type="Texture2D" uid="uid://d00lbq4nag0gw" path="res://Assets/Sunnyland/Props Items and VFX/enemy-death 2/Sprites/enemy-death-2.png" id="2_hagqt"]
+[ext_resource type="Texture2D" uid="uid://c34ihspus56pu" path="res://Assets/Sunnyland/Props Items and VFX/enemy-death 2/Sprites/enemy-death-3.png" id="3_pwq85"]
+[ext_resource type="Texture2D" uid="uid://c4a8q8561tx0m" path="res://Assets/Sunnyland/Props Items and VFX/enemy-death 2/Sprites/enemy-death-4.png" id="4_uekmf"]
+[ext_resource type="Texture2D" uid="uid://kbmty46k4ok8" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer-Idle/slimer-idle1.png" id="5_o2fkb"]
+[ext_resource type="Texture2D" uid="uid://bb8iofih3lwx7" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer-Idle/slimer-idle2.png" id="6_itray"]
+[ext_resource type="Texture2D" uid="uid://o0sdxu10i3c6" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer-Idle/slimer-idle3.png" id="7_0cb1b"]
+[ext_resource type="Texture2D" uid="uid://cmt7xwbtcsebp" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer-Idle/slimer-idle4.png" id="8_d8dsn"]
+[ext_resource type="Texture2D" uid="uid://bqg48pjs32kt0" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer-Idle/slimer-idle5.png" id="9_c82uy"]
+[ext_resource type="Texture2D" uid="uid://cg715g5wkhbhr" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer-Idle/slimer-idle6.png" id="10_agt0o"]
+[ext_resource type="Texture2D" uid="uid://ddgpuyyop4aui" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer-Idle/slimer-idle7.png" id="11_s7hf1"]
+[ext_resource type="Texture2D" uid="uid://1lrrq8ptk6sm" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer-Idle/slimer-idle8.png" id="12_ncgp5"]
+[ext_resource type="Texture2D" uid="uid://bk6alb2suppxo" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer/slimer1.png" id="13_7jtxw"]
+[ext_resource type="Texture2D" uid="uid://brsovw8txb8i5" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer/slimer2.png" id="14_vljus"]
+[ext_resource type="Texture2D" uid="uid://lyihimxropsq" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer/slimer3.png" id="15_umduo"]
+[ext_resource type="Texture2D" uid="uid://cy63o8d266k0h" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer/slimer4.png" id="16_f4o4n"]
+[ext_resource type="Texture2D" uid="uid://3vur6i7adcd0" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer/slimer5.png" id="17_7y485"]
+[ext_resource type="Texture2D" uid="uid://yqc86xk3anmn" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer/slimer6.png" id="18_u4oce"]
+[ext_resource type="Texture2D" uid="uid://dmfkco153uegn" path="res://Assets/Sunnyland/Characters/Enemies and NPC/Slimer/Sprites/Slimer/slimer7.png" id="19_h24r4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wxxdl"]
+height = 22.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mrpi2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yfmhs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hagqt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pwq85")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uekmf")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_o2fkb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_itray")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0cb1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_d8dsn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_c82uy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_agt0o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_s7hf1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ncgp5")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_7jtxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vljus")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_umduo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_f4o4n")
+}],
+"loop": false,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_7y485")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_u4oce")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_h24r4")
+}],
+"loop": false,
+"name": &"Land",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pwq85"]
+radius = 126.063
+
+[node name="Slime" type="CharacterBody2D"]
+script = ExtResource("1_hagqt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_wxxdl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(0.939024, 0.921053)
+sprite_frames = SubResource("SpriteFrames_mrpi2")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+shape = SubResource("CircleShape2D_pwq85")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_player_detection_body_exited"]

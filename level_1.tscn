@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://26vo2gno5chy"]
+[gd_scene load_steps=9 format=4 uid="uid://26vo2gno5chy"]
 
 [ext_resource type="PackedScene" uid="uid://byt1l02tp57ti" path="res://bg.tscn" id="1_hbghi"]
 [ext_resource type="Texture2D" uid="uid://b6iosbt5mocak" path="res://Assets/Sunnyland/Environments/Mountain/Environment/tileset.png" id="1_hn12h"]
 [ext_resource type="PackedScene" uid="uid://hfwwplmixeh7" path="res://player.tscn" id="2_hn12h"]
 [ext_resource type="Texture2D" uid="uid://blvh24u4w7f2u" path="res://Assets/Sunnyland/Environments/Mountain/Environment/props.png" id="2_ihfcg"]
+[ext_resource type="PackedScene" uid="uid://md6kax0htvu0" path="res://slime.tscn" id="5_rka8t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ihfcg"]
 texture = ExtResource("1_hn12h")
@@ -217,9 +218,6 @@ tile_set = SubResource("TileSet_rka8t")
 
 [node name="BG" parent="." instance=ExtResource("1_hbghi")]
 
-[node name="Player" parent="." instance=ExtResource("2_hn12h")]
-position = Vector2(57, 335)
-
 [node name="DoubleJumpTip" type="Label" parent="."]
 offset_left = 1148.0
 offset_top = -39.0
@@ -233,3 +231,13 @@ offset_top = -138.0
 offset_right = 3042.0
 offset_bottom = -115.0
 text = "Rocket jump to reach the next platform (aiming with the mouse)"
+
+[node name="Mobs" type="Node2D" parent="."]
+
+[node name="Slime" parent="Mobs" instance=ExtResource("5_rka8t")]
+position = Vector2(398, 192)
+
+[node name="Player" type="Node2D" parent="."]
+
+[node name="Player" parent="Player" instance=ExtResource("2_hn12h")]
+position = Vector2(57, 335)

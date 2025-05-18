@@ -1,15 +1,20 @@
 extends CharacterBody2D
 
-const SPEED           = 200.0
+const MAX_RUN_SPEED           = 200.0
+const RUN_ACCEL = 1200.0
+const MAX_TOTAL_SPEED = 1200
 const JUMP_VELOCITY   = -400.0
 const MAX_JUMPS       = 2
-const BLAST_DECAY     = 2000.0       # pixels / s² of “air-friction” on the knock-back
+const BLAST_DECAY     = 2_000.0       # pixels / s² of “air-friction” on the knock-back
 const GROUND_FRICTION = 1_200.0       # pixels / s² when no input   (tweak to taste)
+
+
 
 var current_jumps  : int       = 0
 var jumping        : bool      = false
 var was_on_floor   : bool      = false
 var blast_impulse  : Vector2   = Vector2.ZERO   # one-off knock-back that fades out
+
 
 @onready var jump_leeway_timer : Timer           = $JumpLeewayTimer
 @onready var anim               : AnimationPlayer = $AnimationPlayer
@@ -21,18 +26,19 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# 2. ─── READ HORIZONTAL INPUT INTO local var `input_vx` ─
-	var input_vx := 0.0
 	var dir := Input.get_axis("ui_left", "ui_right")
 	if dir != 0:
-		input_vx = dir * SPEED
+		
+		velocity.x = move_toward(velocity.x, dir * MAX_RUN_SPEED, RUN_ACCEL * delta)
 		$AnimatedSprite2D.flip_h = dir < 0
 		if velocity.y == 0:
 			anim.play("Run")
 	else:
 		# natural ground friction when no keys are pressed
-		input_vx = move_toward(velocity.x, 0, GROUND_FRICTION * delta)
+		velocity.x = move_toward(velocity.x, 0, GROUND_FRICTION * delta)
 		if velocity.y == 0:
 			anim.play("Idle")
+			
 
 	# 3. ─── JUMP ─────────────────────────────────────────────
 	if (Input.is_action_just_pressed("ui_accept") \
@@ -45,8 +51,9 @@ func _physics_process(delta: float) -> void:
 		anim.play("Jump")
 
 	# 4. ─── COMBINE INPUT + BLAST, THEN MOVE ────────────────
-	velocity.x = input_vx + blast_impulse.x
-	velocity.y += blast_impulse.y * 0.9                    # vertical kick too (optional)
+	velocity += blast_impulse
+	velocity.x = clamp(velocity.x, -MAX_TOTAL_SPEED, MAX_TOTAL_SPEED)
+
 
 	move_and_slide()
 
@@ -82,5 +89,10 @@ func _on_rocket_exploded(explosion_pos: Vector2) -> void:
 	if distance > MAX_RADIUS:
 		return                                    # out of range
 
-	var falloff := 1.0 - (distance / MAX_RADIUS) # 1 at center, 0 at edge
+	var t = distance / MAX_RADIUS        # 0 → 1
+	var falloff = pow(1.0 - t, 0.6)
 	blast_impulse = to_player.normalized() * STRENGTH * falloff
+	blast_impulse.x *= 1.25
+	blast_impulse.y *= 0.7
+	current_jumps = 1
+	

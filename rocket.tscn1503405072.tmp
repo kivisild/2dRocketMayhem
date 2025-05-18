@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://cihm8l1h6ppik"]
+
+[ext_resource type="Script" uid="uid://bqa0k06d0anxw" path="res://rocket.gd" id="1_5gt1y"]
+[ext_resource type="Texture2D" uid="uid://dyl88jju8sims" path="res://Assets/WeaponPack/Weapons/MainWeapons/rocket.png" id="1_fj03e"]
+[ext_resource type="Texture2D" uid="uid://c8rgus3ro3ub5" path="res://Assets/Sunnyland/Props Items and VFX/fireball-hit/Sprites/fireball-hit-1.png" id="2_7htxx"]
+[ext_resource type="Texture2D" uid="uid://dbobj00hekalg" path="res://Assets/Sunnyland/Props Items and VFX/fireball-hit/Sprites/fireball-hit-2.png" id="3_mnerj"]
+[ext_resource type="Texture2D" uid="uid://cgjaigcibkhro" path="res://Assets/Sunnyland/Props Items and VFX/fireball-hit/Sprites/fireball-hit-3.png" id="4_lm57y"]
+[ext_resource type="Texture2D" uid="uid://bklivy5ix18so" path="res://Assets/Sunnyland/Props Items and VFX/fireball-hit/Sprites/fireball-hit-4.png" id="5_xk1bh"]
+[ext_resource type="Texture2D" uid="uid://vnvr6lc32g44" path="res://Assets/Sunnyland/Props Items and VFX/fireball-hit/Sprites/fireball-hit-5.png" id="6_edwur"]
+[ext_resource type="Texture2D" uid="uid://dwh76jqbku214" path="res://Assets/Sunnyland/Props Items and VFX/fireball-hit/Sprites/fireball-hit-6.png" id="7_aw411"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5gt1y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mg04i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7htxx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mnerj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lm57y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xk1bh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_edwur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_aw411")
+}],
+"loop": true,
+"name": &"Explosion",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fj03e")
+}],
+"loop": true,
+"name": &"Rocket",
+"speed": 5.0
+}]
+
+[node name="Rocket" type="Area2D"]
+script = ExtResource("1_5gt1y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5gt1y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mg04i")
+animation = &"Explosion"
+autoplay = "Rocket"
+frame_progress = 0.0411232
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

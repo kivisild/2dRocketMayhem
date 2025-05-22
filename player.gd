@@ -6,7 +6,7 @@ const MAX_TOTAL_SPEED = 1200
 const JUMP_VELOCITY   = -400.0
 const MAX_JUMPS       = 2
 const BLAST_DECAY     = 2_000.0       # pixels / s² of “air-friction” on the knock-back
-const GROUND_FRICTION = 1_200.0       # pixels / s² when no input   (tweak to taste)
+const GROUND_FRICTION = 1_200.0       # pixels / s² when no input
 
 
 

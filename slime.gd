@@ -7,6 +7,9 @@ const JUMP_FORCE = 250
 var on_ground := false
 var dead := false
 
+func _ready() -> void:
+	add_to_group("Slime")
+
 func _physics_process(delta: float) -> void:
 	velocity += get_gravity() * delta
 	on_ground = is_on_floor()
@@ -14,12 +17,10 @@ func _physics_process(delta: float) -> void:
 		return
 	if chase == true:
 		get_node("AnimatedSprite2D").play("Jump")
-		print("Playing Jump")
 		if is_on_floor():
 			if not on_ground:
 				
 				get_node("AnimatedSprite2D").play("Land")
-				print("Playing land")
 			on_ground = true
 		player = get_node("../../Player/Player")
 		var direction = (player.position- self.position).normalized()
@@ -34,7 +35,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 		
 		get_node("AnimatedSprite2D").play("Idle")
-		print("Playing idle")
 		
 	if chase and on_ground:
 		velocity.y = -JUMP_FORCE
@@ -64,4 +64,17 @@ func _on_jump_kill_body_entered(body: Node2D) -> void:
 	await get_node("AnimatedSprite2D").animation_finished
 	queue_free()
 	
-r.connect("exploded", Callable(self, "_on_rocket_exploded"))
+func _on_rocket_exploded(explosion_pos: Vector2) -> void:
+	print("exploded")
+	const MAX_RADIUS := 100.0
+	const STRENGTH   := 300.0
+
+	var to_slime := global_position - explosion_pos
+	var distance  := to_slime.length()
+	if distance < MAX_RADIUS:
+		dead = true
+		get_node("AnimatedSprite2D").play("DeathExplode")
+		await get_node("AnimatedSprite2D").animation_finished
+		queue_free()                                    # out of range
+
+	

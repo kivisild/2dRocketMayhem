@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://hfwwplmixeh7"]
+[gd_scene load_steps=27 format=3 uid="uid://hfwwplmixeh7"]
 
 [ext_resource type="Texture2D" uid="uid://dtr68hmcb40j8" path="res://Assets/Sunnyland/Characters/Players/Fiery Imp/idle/Sprites/idle-1.png" id="1_op7ga"]
 [ext_resource type="Script" uid="uid://disq2uoe710xc" path="res://player.gd" id="1_q13i1"]
@@ -198,6 +198,22 @@ _data = {
 &"Run": SubResource("Animation_q13i1")
 }
 
+[sub_resource type="GDScript" id="GDScript_q13i1"]
+script/source = "extends Node2D    # or whatever your root is
+
+var ingame := true
+var time   := 0.0
+
+func _process(delta):
+	updateTimer(delta)
+
+func updateTimer(delta):
+	if ingame:
+		time += delta
+	$StopperLabel.text = \"%0.2f\" % time
+	$StopperLabel.show()
+"
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_q13i1")
 
@@ -226,3 +242,12 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Stopper" type="Node2D" parent="."]
+script = SubResource("GDScript_q13i1")
+
+[node name="StopperLabel" type="Label" parent="Stopper"]
+offset_left = -400.0
+offset_top = -150.0
+offset_right = -399.0
+offset_bottom = -127.0

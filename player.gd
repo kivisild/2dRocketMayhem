@@ -76,7 +76,8 @@ func _physics_process(delta: float) -> void:
 		r.velocity  = aim_dir * r.speed
 		r.connect("exploded", Callable(self, "_on_rocket_exploded"))
 		get_tree().current_scene.add_child(r)
-
+		for slime in get_tree().get_nodes_in_group("Slime"):
+			r.connect("exploded", Callable(slime, "_on_rocket_exploded"))
 
 # ───────────────────────────
 #  ROCKET BLAST CALLBACK
